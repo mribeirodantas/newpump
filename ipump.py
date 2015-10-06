@@ -5,9 +5,9 @@ import threading
 import sys
 from time import sleep
 import driver
+from jsonsocket import Server
 
 lock = threading.Lock()
-
 
 class MyThread(threading.Thread):
     def __init__(self, op):
@@ -27,7 +27,7 @@ class MyThread(threading.Thread):
             lock.acquire()
             tanque = 0
             leitura_tanque = conn.readAD(tanque) * 6.25
-            print 'Tanque 1: %s' % (leitura_tanque)
+            # print 'Tanque 1: %s' % (leitura_tanque)
             lock.release()
             sleep(1)
 
@@ -37,28 +37,35 @@ class MyThread(threading.Thread):
             lock.acquire()
             canal = 0
             conn.writeDA(canal, tensao)
-            print 'Escrevendo %s em %s' % (tensao, canal)
+            # print 'Escrevendo %s em %s' % (tensao, canal)
             lock.release()
             sleep(1)
 
     def calc_valores(self):
         while not self.kill_received:
             lock.acquire()
-            print 'Calculando...'
+            # print 'Calculando...'
             lock.release()
             sleep(1)
 
     def conn_supervisorio(self):
-        global i, tensao
+        # global i, tensao
         while not self.kill_received:
-            lock.acquire()
-            if i < 3:
-                i += 1
-            if i == 3:
-                i = 0
-                tensao += 1
-            lock.release()
-            sleep(1)
+            server.accept()
+            datain = server.recv()
+            print datain
+            server.send({'sptq_1': 12, "sptq_2": 12, 'pvtq_1': 12,
+                         "pvtq_2": 12, "mvtq_1": 12, "mvtq_2": 12,
+                         "tp": 0, "tr": 0, "ts": 0, "mp": 0, "ess": 0, })
+        #     lock.acquire()
+        #     if i < 3:
+        #         i += 1
+        #     if i == 3:
+        #         i = 0
+        #         tensao += 1
+        #     lock.release()
+        #     sleep(1)
+        # server.send({'response': '2'})
 
 
 def main():
@@ -82,6 +89,9 @@ def main():
         threads = [t.join(3) for t in threads if t is not None and t.isAlive()]
 
 if __name__ == '__main__':
+    host = '192.168.1.108'
+    port = 8001
+    server = Server(host, port)
     threads = []
     i = tensao = 0
     conn = driver.Quanser("localhost", 20081)
