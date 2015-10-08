@@ -18,26 +18,40 @@ def controle_d(Kd, h, erro, erro_passado):
 
 
 def setar_pid(data):
-    settings.tanque['tanque'] = data['tanque']
 
-    if data['controle']['tipo'] == 'P':
-        settings.controle['Kp'] = data['controle']['Kp']
-        settings.controle['tipo'] = 1
-    elif data['controle']['tipo'] == 'PI':
-        settings.controle['Kp'] = data['controle']['Kp']
-        settings.controle['Ki'] = data['controle']['Ki']
-        settings.controle['tipo'] = 2
-    elif data['controle']['tipo'] == 'PD':
-        settings.controle['Kp'] = data['controle']['Kp']
-        settings.controle['Kd'] = data['controle']['Kd']
-        settings.controle['tipo'] = 3
-    elif data['controle']['tipo'] == 'PID':
-        settings.controle['Kp'] = data['controle']['Kp']
-        settings.controle['Ki'] = data['controle']['Ki']
-        settings.controle['Kd'] = data['controle']['Kd']
-        settings.controle['tipo'] = 4
-    elif data['controle']['tipo'] == 'PI-D':
-        settings.controle['Kp'] = data['controle']['Kp']
-        settings.controle['Ki'] = data['controle']['Ki']
-        settings.controle['Kd'] = data['controle']['Kd']
-        settings.controle['tipo'] = 5
+    settings.controle['tipo'] = data['controlador']['tipo']
+    settings.controle['tanque'] = data['tanque']
+
+    if settings.controle['tanque'] == 0 and settings.controle['tipo'] == 'simples':
+
+        if data['controlador']['controle_1']['tipo'] == 'P':
+
+            settings.controle['controle_1']['Kp'] = data['controlador']['controle_1']['Kp']
+            settings.controle['controle_1']['tipo'] = 1
+
+        elif data['controlador']['controle_1']['tipo'] == 'PI':
+
+            settings.controle['controle_1']['Kp'] = data['controlador']['controle_1']['Kp']
+            settings.controle['controle_1']['Ki'] = data['controlador']['controle_1']['Ki']
+            settings.controle['controle_1']['tipo'] = 2
+
+        elif data['controlador']['controle_1']['tipo'] == 'PD':
+
+            settings.controle['controle_1']['Kp'] = data['controlador']['controle_1']['Kp']
+            settings.controle['controle_1']['Kd'] = data['controlador']['controle_1']['Kd']
+            settings.controle['controle_1']['tipo'] = 3
+
+        elif data['controlador']['controle_1']['tipo'] == 'PID':
+
+            settings.controle['controle_1']['Kp'] = data['controlador']['controle_1']['Kp']
+            settings.controle['controle_1']['Ki'] = data['controlador']['controle_1']['Ki']
+            settings.controle['controle_1']['Kd'] = data['controlador']['controle_1']['Kd']
+            settings.controle['controle_1']['tipo'] = 4
+
+        elif data['controlador']['controle_1']['tipo'] == 'PI-D':
+
+            settings.controle['controle_1']['Kp'] = data['controlador']['controle_1']['Kp']
+            settings.controle['controle_1']['Ki'] = data['controlador']['controle_1']['Ki']
+            settings.controle['controle_1']['Kd'] = data['controlador']['controle_1']['Kd']
+            settings.controle['controle_1']['tipo'] = 5
+    # elif data['controlador']['tipo'] == 'cascata':
