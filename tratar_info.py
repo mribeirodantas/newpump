@@ -1,5 +1,6 @@
 __author__ = 'pabloholanda'
 import settings
+import sinal
 
 
 def enviar_parametros():
@@ -9,8 +10,9 @@ def enviar_parametros():
 def setar_tipo_controle(data):
     try:
         if data['malha_aberta']:
-            print "malha aberta"
+            sinal.setar_sinal(data)
+            print settings.sinal
         else:
-            print "malha fechada"
+            sinal.setar_sinal(data)
     except:
         pass
