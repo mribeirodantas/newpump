@@ -10,7 +10,12 @@ def init():
         'mvtq_2': 0.00,
         'sptq_1': 0.00,
         'sptq_2': 0.00,
-        'tanque': 0
+        'tanque': 0,
+        'tp': 0,
+        'tr': 0,
+        'ts': 0,
+        'mp': 0,
+        'ess': 0
     }
 
     sinal = {

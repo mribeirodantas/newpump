@@ -6,6 +6,7 @@ import sys
 from time import sleep
 import driver
 from jsonsocket import Server
+import settings, tratar_info
 
 lock = threading.Lock()
 
@@ -52,11 +53,19 @@ class MyThread(threading.Thread):
         # global i, tensao
         while not self.kill_received:
             server.accept()
-            datain = server.recv()
-            print datain
-            server.send({'sptq_1': 12, "sptq_2": 12, 'pvtq_1': 12,
-                         "pvtq_2": 12, "mvtq_1": 12, "mvtq_2": 12,
-                         "tp": 0, "tr": 0, "ts": 0, "mp": 0, "ess": 0, })
+            data_in = server.recv()
+            try:
+                 # Ler Variáveis
+                 if data_in['comando'] == 0:
+                     server.send(tratar_info.enviar_parametros())
+                 # Controlar
+                 elif data_in['comando'] == 1:
+                     tratar_info.setar_tipo_controle(data_in)
+            except:
+                pass
+            # server.send({'sptq_1': 12, "sptq_2": 12, 'pvtq_1': 12,
+            #              "pvtq_2": 12, "mvtq_1": 12, "mvtq_2": 12,
+            #              "tp": 0, "tr": 0, "ts": 0, "mp": 0, "ess": 0, })
         #     lock.acquire()
         #     if i < 3:
         #         i += 1
@@ -89,10 +98,13 @@ def main():
         threads = [t.join(3) for t in threads if t is not None and t.isAlive()]
 
 if __name__ == '__main__':
-    host = '192.168.1.108'
+    settings.init()
+
+    host = '127.0.0.1'
     port = 8001
     server = Server(host, port)
     threads = []
+
     i = tensao = 0
     conn = driver.Quanser("localhost", 20081)
     if conn == -1:
