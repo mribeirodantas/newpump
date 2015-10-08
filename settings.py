@@ -29,6 +29,7 @@ def init():
     }
 
     controle = {
+        'tipo': 0,
         'Kp': 0.000,
         'Ki': 0.000,
         'Kd': 0.000,
