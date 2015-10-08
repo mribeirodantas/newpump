@@ -49,13 +49,14 @@ def gerar_sinal(tempo):
         s = settings.sinal['amp_max']*math.sin(2.0*math.pi*w*tempo)
 
         if s > 0:
-            return settings.sinal['amp_max']
+            return settings.sinal['offset'] + settings.sinal['amp_max']
         elif s < 0:
-            return -1 * settings.sinal['amp_max']
-    #     return sinal
-    # elif settings.sinal['tipo_sinal'] == 3:
-    #     sinal = settings.sinal['offset'] + sinais.ondaDenteSerra(sptq_1, duracao, deslocamento, tempo)
-    #     return sinal
+            return settings.sinal['offset'] + (-1 * settings.sinal['amp_max'])
+
+    elif settings.sinal['tipo_sinal'] == 3:
+        return settings.sinal['offset'] + (2*settings.sinal['amp_max'] *\
+               ((tempo/settings.sinal['duracao']) - math.floor(tempo/settings.sinal['duracao']))\
+               - settings.sinal['amp_max'])
     # elif settings.sinal['tipo_sinal'] == 4:
     #     sinal = sinais.sinalAleatorio(amp_min, amp_max)
     #     return sinal
