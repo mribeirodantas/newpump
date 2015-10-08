@@ -54,4 +54,36 @@ def setar_pid(data):
             settings.controle['controle_1']['Ki'] = data['controlador']['controle_1']['Ki']
             settings.controle['controle_1']['Kd'] = data['controlador']['controle_1']['Kd']
             settings.controle['controle_1']['tipo'] = 5
-    # elif data['controlador']['tipo'] == 'cascata':
+
+    elif settings.controle['tanque'] == 1 and settings.controle['tipo'] == 'simples':
+
+        if data['controlador']['controle_2']['tipo'] == 'P':
+
+            settings.controle['controle_2']['Kp'] = data['controlador']['controle_2']['Kp']
+            settings.controle['controle_2']['tipo'] = 1
+
+        elif data['controlador']['controle_2']['tipo'] == 'PI':
+
+            settings.controle['controle_2']['Kp'] = data['controlador']['controle_2']['Kp']
+            settings.controle['controle_2']['Ki'] = data['controlador']['controle_2']['Ki']
+            settings.controle['controle_2']['tipo'] = 2
+
+        elif data['controlador']['controle_2']['tipo'] == 'PD':
+
+            settings.controle['controle_2']['Kp'] = data['controlador']['controle_2']['Kp']
+            settings.controle['controle_2']['Kd'] = data['controlador']['controle_2']['Kd']
+            settings.controle['controle_2']['tipo'] = 3
+
+        elif data['controlador']['controle_2']['tipo'] == 'PID':
+
+            settings.controle['controle_2']['Kp'] = data['controlador']['controle_2']['Kp']
+            settings.controle['controle_2']['Ki'] = data['controlador']['controle_2']['Ki']
+            settings.controle['controle_2']['Kd'] = data['controlador']['controle_2']['Kd']
+            settings.controle['controle_2']['tipo'] = 4
+
+        elif data['controlador']['controle_2']['tipo'] == 'PI-D':
+
+            settings.controle['controle_2']['Kp'] = data['controlador']['controle_2']['Kp']
+            settings.controle['controle_2']['Ki'] = data['controlador']['controle_2']['Ki']
+            settings.controle['controle_2']['Kd'] = data['controlador']['controle_2']['Kd']
+            settings.controle['controle_2']['tipo'] = 5
