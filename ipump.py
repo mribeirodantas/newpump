@@ -26,9 +26,8 @@ class MyThread(threading.Thread):
     def ler_altura(self):
         while not self.kill_received:
             lock.acquire()
-            tanque = 0
-            leitura_tanque = conn.readAD(tanque) * 6.25
-            # print 'Tanque 1: %s' % (leitura_tanque)
+            settings.tanque['pvtq_1'] = conn.readAD(0) * 6.25
+            settings.tanque['pvtq_2'] = conn.readAD(1) * 6.25
             lock.release()
             sleep(1)
 
@@ -50,7 +49,6 @@ class MyThread(threading.Thread):
             sleep(1)
 
     def conn_supervisorio(self):
-        # global i, tensao
         while not self.kill_received:
             server.accept()
             data_in = server.recv()
@@ -63,18 +61,6 @@ class MyThread(threading.Thread):
                      tratar_info.setar_tipo_controle(data_in)
             except:
                 pass
-            # server.send({'sptq_1': 12, "sptq_2": 12, 'pvtq_1': 12,
-            #              "pvtq_2": 12, "mvtq_1": 12, "mvtq_2": 12,
-            #              "tp": 0, "tr": 0, "ts": 0, "mp": 0, "ess": 0, })
-        #     lock.acquire()
-        #     if i < 3:
-        #         i += 1
-        #     if i == 3:
-        #         i = 0
-        #         tensao += 1
-        #     lock.release()
-        #     sleep(1)
-        # server.send({'response': '2'})
 
 
 def main():
