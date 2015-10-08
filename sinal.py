@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 __author__ = 'pabloholanda'
 import settings
 
@@ -15,7 +16,7 @@ def setar_sinal(data):
             settings.sinal['periodo'] = data['sinal']['periodo_max']
             settings.sinal['offset'] = data['sinal']['offset']
 
-        elif data['sinal']['tipo'] == 'quadrada':
+        elif data['sinal']['tipo'] == 'quadrado':
             settings.sinal['tipo_sinal'] = 2
             settings.sinal['amp_max'] = data['sinal']['amp_max']
             settings.sinal['periodo'] = data['sinal']['periodo_max']
@@ -27,7 +28,8 @@ def setar_sinal(data):
             settings.sinal['duracao'] = data['sinal']['periodo_max']
             settings.sinal['offset'] = data['sinal']['offset']
 
-        elif data['sinal']['tipo'] == 'aleatorio':
+        elif data['sinal']['tipo'] == u'aleatório':
             settings.sinal['tipo_sinal'] = 4
             settings.sinal['amp_min'] = data['sinal']['amp_min']
             settings.sinal['amp_max'] = data['sinal']['amp_max']
+            settings.sinal['offset'] = data['sinal']['offset']

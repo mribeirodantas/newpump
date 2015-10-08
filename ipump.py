@@ -118,4 +118,6 @@ if __name__ == '__main__':
         print "Ctrl-c recebido! Enviando SIGINT para todas as threads..."
         for t in threads:
             t.kill_received = True
+            server.close()
+            conn.closeServer()
             sys.exit(0)
