@@ -53,6 +53,8 @@ class MyThread(threading.Thread):
         while not self.kill_received:
             server.accept()
             data_in = server.recv()
+            print data_in
+
             try:
                  # Ler Variáveis
                  if data_in['comando'] == 0:

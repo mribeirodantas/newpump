@@ -120,7 +120,7 @@ def _send(socket, data):
 def _recv(socket):
   # read the length of the data, letter by letter until we reach EOL
   deserialized= ''
-  char = socket.recv(256)
+  char = socket.recv(512)
   try:
     deserialized = json.loads(char)
   except:
