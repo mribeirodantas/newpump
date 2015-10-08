@@ -6,7 +6,9 @@ import sys
 from time import sleep
 import driver
 from jsonsocket import Server
-import settings, tratar_info
+import settings
+import tratar_info
+import sinal
 
 lock = threading.Lock()
 
@@ -32,12 +34,11 @@ class MyThread(threading.Thread):
             sleep(1)
 
     def escrever_tensao(self):
-        global tensao
+        t = 0.1
         while not self.kill_received:
             lock.acquire()
-            canal = 0
-            conn.writeDA(canal, tensao)
-            # print 'Escrevendo %s em %s' % (tensao, canal)
+            conn.writeDA(0, sinal.gerar_sinal(t))
+            t += 0.1
             lock.release()
             sleep(1)
 
