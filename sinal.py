@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 __author__ = 'pabloholanda'
 import settings
+import math
 
 
 def setar_sinal(data):
@@ -33,3 +34,22 @@ def setar_sinal(data):
             settings.sinal['amp_min'] = data['sinal']['amp_min']
             settings.sinal['amp_max'] = data['sinal']['amp_max']
             settings.sinal['offset'] = data['sinal']['offset']
+
+
+def gerar_sinal(tempo):
+    if settings.sinal['tipo_sinal'] == 0:
+        return settings.sinal['offset'] + settings.sinal['amp_max']
+
+    elif settings.sinal['tipo_sinal'] == 1:
+        w = 1.0/settings.sinal['periodo']
+        return settings.sinal['offset'] + (settings.sinal['amp_max']*math.sin(2.0*math.pi*w*tempo))
+
+    # elif settings.sinal['tipo_sinal'] == 2:
+    #     sinal = settings.sinal['offset'] + sinais.ondaQuadrada(settings.sinal['amp_max'], settings.sinal['periodo'], deslocamento, tempo)
+    #     return sinal
+    # elif settings.sinal['tipo_sinal'] == 3:
+    #     sinal = settings.sinal['offset'] + sinais.ondaDenteSerra(sptq_1, duracao, deslocamento, tempo)
+    #     return sinal
+    # elif settings.sinal['tipo_sinal'] == 4:
+    #     sinal = sinais.sinalAleatorio(amp_min, amp_max)
+    #     return sinal
