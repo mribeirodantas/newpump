@@ -90,12 +90,13 @@ def main():
 if __name__ == '__main__':
     settings.init()
 
-    host = '127.0.0.1'
+    # host = '10.13.100.83'
+    host = 'localhost'
     port = 8001
     server = Server(host, port)
     threads = []
 
-    conn = driver.Quanser("localhost", 20081)
+    conn = driver.Quanser("10.13.99.69", 20081)
     if conn == -1:
         print 'Não foi possível estabelecer uma comunicação.\nRetornou -1'
     else:
