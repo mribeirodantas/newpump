@@ -184,65 +184,65 @@ def controlador_externo(tempo):
 
 
 def controlador_interno(sp):
-    if settings.controle['controle_1']['tipo'] == 1:
+    if settings.controle['controle_2']['tipo'] == 1:
 
         settings.tanque['sptq_1'] = sp
         erro = calc_erro(settings.tanque['sptq_1'], settings.tanque['pvtq_1'])
-        settings.controle['controle_1']['P'] = controle_p(settings.controle['controle_1']['Kp'], erro)
-        settings.tanque['mvtq_1'] = settings.controle['controle_1']['P']
+        settings.controle['controle_2']['P'] = controle_p(settings.controle['controle_2']['Kp'], erro)
+        settings.tanque['mvtq_1'] = settings.controle['controle_2']['P']
         settings.tanque['mvtq_1'] = travas.sequencia_travas(settings.tanque['mvtq_1'])
         return settings.tanque['mvtq_1']
 
-    elif settings.controle['controle_1']['tipo'] == 2:
+    elif settings.controle['controle_2']['tipo'] == 2:
 
         settings.tanque['sptq_1'] = sp
         erro = calc_erro(settings.tanque['sptq_1'], settings.tanque['pvtq_1'])
-        settings.controle['controle_1']['P'] = controle_p(settings.controle['controle_1']['Kp'], erro)
-        settings.controle['controle_1']['I'] = controle_i(settings.controle['controle_1']['Ki'], 0.1,
-                                                          settings.controle['controle_1']['I'], erro)
-        settings.tanque['mvtq_1'] = settings.controle['controle_1']['P'] + settings.controle['controle_1']['I']
+        settings.controle['controle_2']['P'] = controle_p(settings.controle['controle_2']['Kp'], erro)
+        settings.controle['controle_2']['I'] = controle_i(settings.controle['controle_2']['Ki'], 0.1,
+                                                          settings.controle['controle_2']['I'], erro)
+        settings.tanque['mvtq_1'] = settings.controle['controle_2']['P'] + settings.controle['controle_2']['I']
         settings.tanque['mvtq_1'] = travas.sequencia_travas(settings.tanque['mvtq_1'])
         return settings.tanque['mvtq_1']
 
-    elif settings.controle['controle_1']['tipo'] == 3:
+    elif settings.controle['controle_2']['tipo'] == 3:
 
         settings.tanque['sptq_1'] = sp
         erro = calc_erro(settings.tanque['sptq_1'], settings.tanque['pvtq_1'])
-        settings.controle['controle_1']['P'] = controle_p(settings.controle['controle_1']['Kp'], erro)
-        settings.controle['controle_1']['D'] = controle_d(settings.controle['controle_1']['Kd'], 0.1, erro,
+        settings.controle['controle_2']['P'] = controle_p(settings.controle['controle_2']['Kp'], erro)
+        settings.controle['controle_2']['D'] = controle_d(settings.controle['controle_2']['Kd'], 0.1, erro,
                                                           settings.tanque['erro_passado'])
         settings.tanque['erro_passado'] = erro
-        settings.tanque['mvtq_1'] = settings.controle['controle_1']['P'] + settings.controle['controle_1']['D']
+        settings.tanque['mvtq_1'] = settings.controle['controle_2']['P'] + settings.controle['controle_2']['D']
         settings.tanque['mvtq_1'] = travas.sequencia_travas(settings.tanque['mvtq_1'])
         return settings.tanque['mvtq_1']
 
-    elif settings.controle['controle_1']['tipo'] == 4:
+    elif settings.controle['controle_2']['tipo'] == 4:
 
         settings.tanque['sptq_1'] = sp
         erro = calc_erro(settings.tanque['sptq_1'], settings.tanque['pvtq_1'])
-        settings.controle['controle_1']['P'] = controle_p(settings.controle['controle_1']['Kp'], erro)
-        settings.controle['controle_1']['I'] = controle_i(settings.controle['controle_1']['Ki'], 0.1,
-                                                          settings.controle['controle_1']['I'], erro)
-        settings.controle['controle_1']['D'] = controle_d(settings.controle['controle_1']['Kd'], 0.1, erro,
+        settings.controle['controle_2']['P'] = controle_p(settings.controle['controle_2']['Kp'], erro)
+        settings.controle['controle_2']['I'] = controle_i(settings.controle['controle_2']['Ki'], 0.1,
+                                                          settings.controle['controle_2']['I'], erro)
+        settings.controle['controle_2']['D'] = controle_d(settings.controle['controle_2']['Kd'], 0.1, erro,
                                                           settings.tanque['erro_passado'])
         settings.tanque['erro_passado'] = erro
-        settings.tanque['mvtq_1'] = settings.controle['controle_1']['P'] +\
-                                    settings.controle['controle_1']['I'] + settings.controle['controle_1']['D']
+        settings.tanque['mvtq_1'] = settings.controle['controle_2']['P'] +\
+                                    settings.controle['controle_2']['I'] + settings.controle['controle_2']['D']
         settings.tanque['mvtq_1'] = travas.sequencia_travas(settings.tanque['mvtq_1'])
         return settings.tanque['mvtq_1']
 
-    elif settings.controle['controle_1']['tipo'] == 5:
+    elif settings.controle['controle_2']['tipo'] == 5:
 
         settings.tanque['sptq_1'] = sp
         erro = calc_erro(settings.tanque['sptq_1'], settings.tanque['pvtq_1'])
-        settings.controle['controle_1']['P'] = controle_p(settings.controle['controle_1']['Kp'], erro)
-        settings.controle['controle_1']['I'] = controle_i(settings.controle['controle_1']['Ki'], 0.1,
-                                                          settings.controle['controle_1']['I'], erro)
-        settings.controle['controle_1']['D'] = controle_d(settings.controle['controle_1']['Kd'], 0.1, erro,
+        settings.controle['controle_2']['P'] = controle_p(settings.controle['controle_2']['Kp'], erro)
+        settings.controle['controle_2']['I'] = controle_i(settings.controle['controle_2']['Ki'], 0.1,
+                                                          settings.controle['controle_2']['I'], erro)
+        settings.controle['controle_2']['D'] = controle_d(settings.controle['controle_2']['Kd'], 0.1, erro,
                                                           settings.tanque['erro_passado'])
         settings.tanque['erro_passado'] = erro
-        settings.tanque['mvtq_1'] = settings.controle['controle_1']['P'] +\
-                                    settings.controle['controle_1']['I'] - settings.controle['controle_1']['D']
+        settings.tanque['mvtq_1'] = settings.controle['controle_2']['P'] +\
+                                    settings.controle['controle_2']['I'] - settings.controle['controle_2']['D']
         settings.tanque['mvtq_1'] = travas.sequencia_travas(settings.tanque['mvtq_1'])
         return settings.tanque['mvtq_1']
 

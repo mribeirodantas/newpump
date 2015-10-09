@@ -31,7 +31,7 @@ class MyThread(threading.Thread):
             settings.tanque['pvtq_1'] = conn.readAD(0) * 6.25
             settings.tanque['pvtq_2'] = conn.readAD(1) * 6.25
             lock.release()
-            sleep(1)
+            sleep(0.06)
 
     def escrever_tensao(self):
         tempo = 0.1
@@ -42,7 +42,7 @@ class MyThread(threading.Thread):
             conn.writeDA(0, tensao)
             tempo += 0.1
             lock.release()
-            sleep(1)
+            sleep(0.1)
 
     def calc_valores(self):
         while not self.kill_received:
