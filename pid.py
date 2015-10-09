@@ -124,6 +124,129 @@ def setar_pid(data):
             settings.controle['controle_2']['tipo'] = 5
 
 
+def controlador_externo(tempo):
+    if settings.controle['controle_1']['tipo'] == 1:
+
+        settings.tanque['sptq_2'] = sinal.gerar_sinal(tempo)
+        erro = calc_erro(settings.tanque['sptq_2'], settings.tanque['pvtq_2'])
+        settings.controle['controle_1']['P'] = controle_p(settings.controle['controle_1']['Kp'], erro)
+        settings.tanque['mvtq_2'] = settings.controle['controle_1']['P']
+        return settings.tanque['mvtq_2']
+
+    elif settings.controle['controle_1']['tipo'] == 2:
+
+        settings.tanque['sptq_2'] = sinal.gerar_sinal(tempo)
+        erro = calc_erro(settings.tanque['sptq_2'], settings.tanque['pvtq_2'])
+        settings.controle['controle_1']['P'] = controle_p(settings.controle['controle_1']['Kp'], erro)
+        settings.controle['controle_1']['I'] = controle_i(settings.controle['controle_1']['Ki'], 0.1,
+                                                          settings.controle['controle_1']['I'], erro)
+        settings.tanque['mvtq_2'] = settings.controle['controle_1']['P'] + settings.controle['controle_1']['I']
+        return settings.tanque['mvtq_2']
+
+    elif settings.controle['controle_1']['tipo'] == 3:
+
+        settings.tanque['sptq_2'] = sinal.gerar_sinal(tempo)
+        erro = calc_erro(settings.tanque['sptq_2'], settings.tanque['pvtq_2'])
+        settings.controle['controle_1']['P'] = controle_p(settings.controle['controle_1']['Kp'], erro)
+        settings.controle['controle_1']['D'] = controle_d(settings.controle['controle_1']['Kd'], 0.1, erro,
+                                                          settings.tanque['erro_passado'])
+        settings.tanque['erro_passado'] = erro
+        settings.tanque['mvtq_2'] = settings.controle['controle_1']['P'] + settings.controle['controle_1']['D']
+        return settings.tanque['mvtq_2']
+
+    elif settings.controle['controle_1']['tipo'] == 4:
+
+        settings.tanque['sptq_2'] = sinal.gerar_sinal(tempo)
+        erro = calc_erro(settings.tanque['sptq_2'], settings.tanque['pvtq_2'])
+        settings.controle['controle_1']['P'] = controle_p(settings.controle['controle_1']['Kp'], erro)
+        settings.controle['controle_1']['I'] = controle_i(settings.controle['controle_1']['Ki'], 0.1,
+                                                          settings.controle['controle_1']['I'], erro)
+        settings.controle['controle_1']['D'] = controle_d(settings.controle['controle_1']['Kd'], 0.1, erro,
+                                                          settings.tanque['erro_passado'])
+        settings.tanque['erro_passado'] = erro
+        settings.tanque['mvtq_2'] = settings.controle['controle_1']['P'] +\
+                                    settings.controle['controle_1']['I'] + settings.controle['controle_1']['D']
+        return settings.tanque['mvtq_2']
+
+    elif settings.controle['controle_1']['tipo'] == 5:
+
+        settings.tanque['sptq_2'] = sinal.gerar_sinal(tempo)
+        erro = calc_erro(settings.tanque['sptq_2'], settings.tanque['pvtq_2'])
+        settings.controle['controle_1']['P'] = controle_p(settings.controle['controle_1']['Kp'], erro)
+        settings.controle['controle_1']['I'] = controle_i(settings.controle['controle_1']['Ki'], 0.1,
+                                                          settings.controle['controle_1']['I'], erro)
+        settings.controle['controle_1']['D'] = controle_d(settings.controle['controle_1']['Kd'], 0.1, erro,
+                                                          settings.tanque['erro_passado'])
+        settings.tanque['erro_passado'] = erro
+        settings.tanque['mvtq_2'] = settings.controle['controle_1']['P'] +\
+                                    settings.controle['controle_1']['I'] - settings.controle['controle_1']['D']
+        return settings.tanque['mvtq_2']
+
+
+def controlador_interno(sp):
+    if settings.controle['controle_1']['tipo'] == 1:
+
+        settings.tanque['sptq_1'] = sp
+        erro = calc_erro(settings.tanque['sptq_1'], settings.tanque['pvtq_1'])
+        settings.controle['controle_1']['P'] = controle_p(settings.controle['controle_1']['Kp'], erro)
+        settings.tanque['mvtq_1'] = settings.controle['controle_1']['P']
+        settings.tanque['mvtq_1'] = travas.sequencia_travas(settings.tanque['mvtq_1'])
+        return settings.tanque['mvtq_1']
+
+    elif settings.controle['controle_1']['tipo'] == 2:
+
+        settings.tanque['sptq_1'] = sp
+        erro = calc_erro(settings.tanque['sptq_1'], settings.tanque['pvtq_1'])
+        settings.controle['controle_1']['P'] = controle_p(settings.controle['controle_1']['Kp'], erro)
+        settings.controle['controle_1']['I'] = controle_i(settings.controle['controle_1']['Ki'], 0.1,
+                                                          settings.controle['controle_1']['I'], erro)
+        settings.tanque['mvtq_1'] = settings.controle['controle_1']['P'] + settings.controle['controle_1']['I']
+        settings.tanque['mvtq_1'] = travas.sequencia_travas(settings.tanque['mvtq_1'])
+        return settings.tanque['mvtq_1']
+
+    elif settings.controle['controle_1']['tipo'] == 3:
+
+        settings.tanque['sptq_1'] = sp
+        erro = calc_erro(settings.tanque['sptq_1'], settings.tanque['pvtq_1'])
+        settings.controle['controle_1']['P'] = controle_p(settings.controle['controle_1']['Kp'], erro)
+        settings.controle['controle_1']['D'] = controle_d(settings.controle['controle_1']['Kd'], 0.1, erro,
+                                                          settings.tanque['erro_passado'])
+        settings.tanque['erro_passado'] = erro
+        settings.tanque['mvtq_1'] = settings.controle['controle_1']['P'] + settings.controle['controle_1']['D']
+        settings.tanque['mvtq_1'] = travas.sequencia_travas(settings.tanque['mvtq_1'])
+        return settings.tanque['mvtq_1']
+
+    elif settings.controle['controle_1']['tipo'] == 4:
+
+        settings.tanque['sptq_1'] = sp
+        erro = calc_erro(settings.tanque['sptq_1'], settings.tanque['pvtq_1'])
+        settings.controle['controle_1']['P'] = controle_p(settings.controle['controle_1']['Kp'], erro)
+        settings.controle['controle_1']['I'] = controle_i(settings.controle['controle_1']['Ki'], 0.1,
+                                                          settings.controle['controle_1']['I'], erro)
+        settings.controle['controle_1']['D'] = controle_d(settings.controle['controle_1']['Kd'], 0.1, erro,
+                                                          settings.tanque['erro_passado'])
+        settings.tanque['erro_passado'] = erro
+        settings.tanque['mvtq_1'] = settings.controle['controle_1']['P'] +\
+                                    settings.controle['controle_1']['I'] + settings.controle['controle_1']['D']
+        settings.tanque['mvtq_1'] = travas.sequencia_travas(settings.tanque['mvtq_1'])
+        return settings.tanque['mvtq_1']
+
+    elif settings.controle['controle_1']['tipo'] == 5:
+
+        settings.tanque['sptq_1'] = sp
+        erro = calc_erro(settings.tanque['sptq_1'], settings.tanque['pvtq_1'])
+        settings.controle['controle_1']['P'] = controle_p(settings.controle['controle_1']['Kp'], erro)
+        settings.controle['controle_1']['I'] = controle_i(settings.controle['controle_1']['Ki'], 0.1,
+                                                          settings.controle['controle_1']['I'], erro)
+        settings.controle['controle_1']['D'] = controle_d(settings.controle['controle_1']['Kd'], 0.1, erro,
+                                                          settings.tanque['erro_passado'])
+        settings.tanque['erro_passado'] = erro
+        settings.tanque['mvtq_1'] = settings.controle['controle_1']['P'] +\
+                                    settings.controle['controle_1']['I'] - settings.controle['controle_1']['D']
+        settings.tanque['mvtq_1'] = travas.sequencia_travas(settings.tanque['mvtq_1'])
+        return settings.tanque['mvtq_1']
+
+
 def atuar_pid(tempo):
     if settings.controle['tipo'] == 'simples':
         if settings.controle['tanque'] == 0:
@@ -250,3 +373,6 @@ def atuar_pid(tempo):
                                             settings.controle['controle_1']['I'] - settings.controle['controle_1']['D']
                 settings.tanque['mvtq_2'] = travas.sequencia_travas(settings.tanque['mvtq_2'])
                 return settings.tanque['mvtq_2']
+
+    elif settings.controle['tipo'] == 'cascata':
+        return controlador_interno(controlador_externo(tempo))
