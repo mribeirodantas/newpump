@@ -8,7 +8,7 @@ import driver
 from jsonsocket import Server
 import settings
 import tratar_info
-import sinal
+import controlador
 
 lock = threading.Lock()
 
@@ -34,11 +34,13 @@ class MyThread(threading.Thread):
             sleep(1)
 
     def escrever_tensao(self):
-        t = 0.1
+        tempo = 0.1
+        tensao = 0.00
         while not self.kill_received:
             lock.acquire()
-            conn.writeDA(0, sinal.gerar_sinal(t))
-            t += 0.1
+            tensao = controlador.setar_tensao(tempo)
+            conn.writeDA(0, tensao)
+            tempo += 0.1
             lock.release()
             sleep(1)
 
@@ -93,7 +95,6 @@ if __name__ == '__main__':
     server = Server(host, port)
     threads = []
 
-    i = tensao = 0
     conn = driver.Quanser("localhost", 20081)
     if conn == -1:
         print 'Não foi possível estabelecer uma comunicação.\nRetornou -1'

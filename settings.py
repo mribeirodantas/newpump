@@ -28,8 +28,9 @@ def init():
     }
 
     controle = {
-        'tipo': '',
+        'tipo': 'simples',
         'tanque': 0,
+        'malha_aberta': True,
         'controle_1': {
             'Kp': 0.000,
             'Ki': 0.000,
