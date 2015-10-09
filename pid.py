@@ -1,7 +1,7 @@
 __author__ = 'pabloholanda'
 import settings
 import sinal
-
+import travas
 
 def calc_erro(sp, pv):
     return (sp - pv)
@@ -128,9 +128,11 @@ def atuar_pid(tempo):
     if settings.controle['tipo'] == 'simples':
         if settings.controle['tanque'] == 0:
             if settings.controle['controle_1']['tipo'] == 1:
-                sinal_pid = sinal.gerar_sinal(tempo)
-                erro = calc_erro(sinal, settings.tanque['pvtq_1'])
+                settings.tanque['sptq_1'] = sinal.gerar_sinal(tempo)
+                erro = calc_erro(settings.tanque['sptq_1'], settings.tanque['pvtq_1'])
                 P = controle_p(settings.controle['controle_1']['Kp'], erro)
                 settings.tanque['mvtq_1'] = P
+                settings.tanque['mvtq_1'] = travas.sequencia_travas(settings.tanque['mvtq_1'])
+                return settings.tanque['mvtq_1']
         else:
             return 0
