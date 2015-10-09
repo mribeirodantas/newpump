@@ -12,42 +12,25 @@ def trava(vp):
 
 
 def trava_alto_nivel(vp):
-    if settings.controle['tanque'] == 0:
-        if settings.tanque['pvtq_1'] > 28 and vp > 3.15:
-            return 3.15
-        else:
-            return vp
+    if settings.tanque['pvtq_1'] > 28 and vp > 3.15:
+        return 3.15
     else:
-        if settings.tanque['pvtq_2'] > 28 and vp > 3.15:
-            return 3.15
-        else:
-            return vp
+        return vp
 
 
 def trava_muito_nivel(vp):
-    if settings.controle['tanque'] == 0:
-        if (settings.tanque['pvtq_1'] > 29.00) and (vp > 0):
-            return 0.0
-        else:
-            return vp
+    if (settings.tanque['pvtq_1'] > 29.00) and (vp > 0):
+        return 0.0
     else:
-        if (settings.tanque['pvtq_2'] > 29.00) and (vp > 0):
-            return 0.0
-        else:
-            return vp
+        return vp
 
 
 def trava_nivel_baixo(vp):
-    if settings.controle['tanque'] == 0:
-        if (settings.tanque['pvtq_1'] < 4.00) and (vp < 0):
-            return 0
-        else:
-            return vp
+    if (settings.tanque['pvtq_1'] < 4.00) and (vp < 0):
+        return 0
     else:
-        if (settings.tanque['pvtq_2'] < 4.00) and (vp < 0):
-            return 0
-        else:
-            return vp
+        return vp
+
 
 
 def sequencia_travas(vp):
