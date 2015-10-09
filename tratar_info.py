@@ -21,6 +21,7 @@ def setar_tipo_controle(data):
 
             sinal.setar_sinal(data)
             print settings.sinal
+
         else:
             sinal.setar_sinal(data)
             pid.setar_pid(data)

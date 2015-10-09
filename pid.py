@@ -1,5 +1,7 @@
 __author__ = 'pabloholanda'
 import settings
+import sinal
+
 
 def calc_erro(sp, pv):
     return (sp - pv)
@@ -120,3 +122,15 @@ def setar_pid(data):
             settings.controle['controle_2']['Ki'] = data['controlador']['controle_2']['Ki']
             settings.controle['controle_2']['Kd'] = data['controlador']['controle_2']['Kd']
             settings.controle['controle_2']['tipo'] = 5
+
+
+def atuar_pid(tempo):
+    if settings.controle['tipo'] == 'simples':
+        if settings.controle['tanque'] == 0:
+            if settings.controle['controle_1']['tipo'] == 1:
+                sinal_pid = sinal.gerar_sinal(tempo)
+                erro = calc_erro(sinal, settings.tanque['pvtq_1'])
+                P = controle_p(settings.controle['controle_1']['Kp'], erro)
+                settings.tanque['mvtq_1'] = P
+        else:
+            return 0
