@@ -5,9 +5,12 @@ import threading
 import sys
 from time import sleep
 import driver
+from jsonsocket import Server
+import settings
+import tratar_info
+import controlador
 
 lock = threading.Lock()
-
 
 class MyThread(threading.Thread):
     def __init__(self, op):
@@ -25,40 +28,43 @@ class MyThread(threading.Thread):
     def ler_altura(self):
         while not self.kill_received:
             lock.acquire()
-            tanque = 0
-            leitura_tanque = conn.readAD(tanque) * 6.25
-            print 'Tanque 1: %s' % (leitura_tanque)
+            settings.tanque['pvtq_1'] = conn.readAD(0) * 6.25
+            settings.tanque['pvtq_2'] = conn.readAD(1) * 6.25
             lock.release()
-            sleep(1)
+            sleep(0.06)
 
     def escrever_tensao(self):
-        global tensao
+        tempo = 0.1
+        tensao = 0.00
         while not self.kill_received:
             lock.acquire()
-            canal = 0
-            conn.writeDA(canal, tensao)
-            print 'Escrevendo %s em %s' % (tensao, canal)
+            tensao = controlador.setar_tensao(tempo)
+            conn.writeDA(0, tensao)
+            tempo += 0.1
             lock.release()
-            sleep(1)
+            sleep(0.1)
 
     def calc_valores(self):
         while not self.kill_received:
             lock.acquire()
-            print 'Calculando...'
+            # print 'Calculando...'
             lock.release()
             sleep(1)
 
     def conn_supervisorio(self):
-        global i, tensao
         while not self.kill_received:
-            lock.acquire()
-            if i < 3:
-                i += 1
-            if i == 3:
-                i = 0
-                tensao += 1
-            lock.release()
-            sleep(1)
+            server.accept()
+            data_in = server.recv()
+
+            try:
+                 # Ler Variáveis
+                 if data_in['comando'] == 0:
+                     server.send(tratar_info.enviar_parametros())
+                 # Controlar
+                 elif data_in['comando'] == 1:
+                     tratar_info.setar_tipo_controle(data_in)
+            except:
+                pass
 
 
 def main():
@@ -82,8 +88,13 @@ def main():
         threads = [t.join(3) for t in threads if t is not None and t.isAlive()]
 
 if __name__ == '__main__':
+    settings.init()
+
+    host = '127.0.0.1'
+    port = 8001
+    server = Server(host, port)
     threads = []
-    i = tensao = 0
+
     conn = driver.Quanser("localhost", 20081)
     if conn == -1:
         print 'Não foi possível estabelecer uma comunicação.\nRetornou -1'
@@ -96,4 +107,6 @@ if __name__ == '__main__':
         print "Ctrl-c recebido! Enviando SIGINT para todas as threads..."
         for t in threads:
             t.kill_received = True
+            server.close()
+            conn.closeServer()
             sys.exit(0)
