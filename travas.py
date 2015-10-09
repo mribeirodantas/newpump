@@ -27,12 +27,12 @@ def trava_alto_nivel(vp):
 def trava_muito_nivel(vp):
     if settings.controle['tanque'] == 0:
         if (settings.tanque['pvtq_1'] > 29.00) and (vp > 0):
-            return 0
+            return 0.0
         else:
             return vp
     else:
         if (settings.tanque['pvtq_2'] > 29.00) and (vp > 0):
-            return 0
+            return 0.0
         else:
             return vp
 

@@ -22,7 +22,7 @@ def init():
         'deslocamento': 0,
         'periodo': 0,
         'amp_min': 0,
-        'amp_max': 0,
+        'amp_max': 0.00,
         'offset': 0,
         'duracao': 0
     }
