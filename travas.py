@@ -32,6 +32,14 @@ def trava_nivel_baixo(vp):
         return vp
 
 
+def trava_controlador_externo(nivel):
+    if 0 < nivel <=30:
+        return nivel
+    elif nivel < 0:
+        return 0
+    elif nivel > 30:
+        return 30
+
 
 def sequencia_travas(vp):
     vp = trava(vp)

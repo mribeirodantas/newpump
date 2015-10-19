@@ -26,7 +26,7 @@ def setar_tipo_controle(data):
             sinal.setar_sinal(data)
             pid.setar_pid(data)
             settings.controle['malha_aberta'] = False
-            print settings.sinal
+            # print settings.sinal
             print settings.controle
     except:
         pass

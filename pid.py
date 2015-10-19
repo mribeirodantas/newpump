@@ -131,7 +131,8 @@ def controlador_externo(tempo):
         erro = calc_erro(settings.tanque['sptq_2'], settings.tanque['pvtq_2'])
         settings.controle['controle_1']['P'] = controle_p(settings.controle['controle_1']['Kp'], erro)
         settings.tanque['mvtq_2'] = settings.controle['controle_1']['P']
-        return settings.tanque['mvtq_2']
+        settings.tanque['mvtq_2'] = travas.trava_controlador_externo(settings.tanque['mvtq_2'])
+        return travas.trava_controlador_externo(settings.tanque['mvtq_2'])
 
     elif settings.controle['controle_1']['tipo'] == 2:
 
@@ -141,7 +142,8 @@ def controlador_externo(tempo):
         settings.controle['controle_1']['I'] = controle_i(settings.controle['controle_1']['Ki'], 0.1,
                                                           settings.controle['controle_1']['I'], erro)
         settings.tanque['mvtq_2'] = settings.controle['controle_1']['P'] + settings.controle['controle_1']['I']
-        return settings.tanque['mvtq_2']
+        settings.tanque['mvtq_2'] = travas.trava_controlador_externo(settings.tanque['mvtq_2'])
+        return travas.trava_controlador_externo(settings.tanque['mvtq_2'])
 
     elif settings.controle['controle_1']['tipo'] == 3:
 
@@ -152,7 +154,8 @@ def controlador_externo(tempo):
                                                           settings.tanque['erro_passado'])
         settings.tanque['erro_passado'] = erro
         settings.tanque['mvtq_2'] = settings.controle['controle_1']['P'] + settings.controle['controle_1']['D']
-        return settings.tanque['mvtq_2']
+        settings.tanque['mvtq_2'] = travas.trava_controlador_externo(settings.tanque['mvtq_2'])
+        return travas.trava_controlador_externo(settings.tanque['mvtq_2'])
 
     elif settings.controle['controle_1']['tipo'] == 4:
 
@@ -166,7 +169,8 @@ def controlador_externo(tempo):
         settings.tanque['erro_passado'] = erro
         settings.tanque['mvtq_2'] = settings.controle['controle_1']['P'] +\
                                     settings.controle['controle_1']['I'] + settings.controle['controle_1']['D']
-        return settings.tanque['mvtq_2']
+        settings.tanque['mvtq_2'] = travas.trava_controlador_externo(settings.tanque['mvtq_2'])
+        return travas.trava_controlador_externo(settings.tanque['mvtq_2'])
 
     elif settings.controle['controle_1']['tipo'] == 5:
 
@@ -180,7 +184,8 @@ def controlador_externo(tempo):
         settings.tanque['erro_passado'] = erro
         settings.tanque['mvtq_2'] = settings.controle['controle_1']['P'] +\
                                     settings.controle['controle_1']['I'] - settings.controle['controle_1']['D']
-        return settings.tanque['mvtq_2']
+        settings.tanque['mvtq_2'] = travas.trava_controlador_externo(settings.tanque['mvtq_2'])
+        return travas.trava_controlador_externo(settings.tanque['mvtq_2'])
 
 
 def controlador_interno(sp):
