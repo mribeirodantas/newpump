@@ -29,6 +29,7 @@ def enviar_parametros():
 
 def setar_tipo_controle(data):
     try:
+        settings.tanque['tempo'] = 0.0
         if data['malha_aberta']:
             settings.controle['malha_aberta'] = True
             if data['tanque'] == 0:

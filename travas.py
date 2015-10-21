@@ -32,6 +32,14 @@ def trava_nivel_baixo(vp):
         return vp
 
 
+def nivel_cascata(pv):
+    if pv > 30:
+        return 30
+    elif pv < -30:
+        return -30
+    else:
+        return pv
+
 
 def sequencia_travas(vp):
     vp = trava(vp)

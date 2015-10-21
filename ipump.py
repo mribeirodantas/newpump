@@ -34,13 +34,12 @@ class MyThread(threading.Thread):
             sleep(0.06)
 
     def escrever_tensao(self):
-        tempo = 0.1
         tensao = 0.00
         while not self.kill_received:
             lock.acquire()
-            tensao = controlador.setar_tensao(tempo)
+            tensao = controlador.setar_tensao(settings.tanque['tempo'])
             conn.writeDA(0, tensao)
-            tempo += 0.1
+            settings.tanque['tempo'] += 0.1
             lock.release()
             sleep(0.1)
 
