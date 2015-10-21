@@ -5,7 +5,30 @@ import pid
 
 
 def enviar_parametros():
-    return settings.tanque
+    return {
+        'pvtq_1': settings.tanque['pvtq_1'],
+        'pvtq_2': settings.tanque['pvtq_2'],
+        'mvtq_1': settings.tanque['mvtq_1'],
+        'mvtq_2': settings.tanque['mvtq_2'],
+        'sptq_1': settings.tanque['sptq_1'],
+        'sptq_2': settings.tanque['sptq_2'],
+        'erro_passado': settings.tanque['erro_passado'],
+        'tp': settings.tanque['tp'],
+        'tr': settings.tanque['tr'],
+        'ts': settings.tanque['ts'],
+        'mp': settings.tanque['mp'],
+        'ess': settings.tanque['ess'],
+        'controle_1': {
+            'P': settings.controle['controle_1']['P'],
+            'I': settings.controle['controle_1']['I'],
+            'D': settings.controle['controle_1']['D']
+        },
+        'controle_2': {
+            'P': settings.controle['controle_2']['P'],
+            'I': settings.controle['controle_2']['I'],
+            'D': settings.controle['controle_2']['D']
+        }
+    }
 
 
 def setar_tipo_controle(data):

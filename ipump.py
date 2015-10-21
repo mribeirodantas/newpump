@@ -96,7 +96,8 @@ if __name__ == '__main__':
     server = Server(host, port)
     threads = []
 
-    conn = driver.Quanser("10.13.99.69", 20081)
+    # conn = driver.Quanser("10.13.99.69", 20081)
+    conn = driver.Quanser("localhost", 20081)
     if conn == -1:
         print 'Não foi possível estabelecer uma comunicação.\nRetornou -1'
     else:

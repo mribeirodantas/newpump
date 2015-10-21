@@ -128,42 +128,47 @@ def controlador_externo(tempo):
     if settings.controle['controle_1']['tipo'] == 1:
 
         settings.tanque['sptq_2'] = sinal.gerar_sinal(tempo)
-        erro = calc_erro(settings.tanque['sptq_2'], settings.tanque['pvtq_2'])
-        settings.controle['controle_1']['P'] = controle_p(settings.controle['controle_1']['Kp'], erro)
+        erro_tanque = calc_erro(settings.tanque['sptq_2'], settings.tanque['pvtq_2'])
+        settings.controle['controle_1']['P'] = controle_p(settings.controle['controle_1']['Kp'], erro_tanque)
         settings.tanque['mvtq_2'] = settings.controle['controle_1']['P']
         return settings.tanque['mvtq_2']
 
     elif settings.controle['controle_1']['tipo'] == 2:
-
         settings.tanque['sptq_2'] = sinal.gerar_sinal(tempo)
-        erro = calc_erro(settings.tanque['sptq_2'], settings.tanque['pvtq_2'])
-        settings.controle['controle_1']['P'] = controle_p(settings.controle['controle_1']['Kp'], erro)
+        erro_tanque = calc_erro(settings.tanque['sptq_2'], settings.tanque['pvtq_2'])
+        settings.controle['controle_1']['P'] = controle_p(settings.controle['controle_1']['Kp'], erro_tanque)
         settings.controle['controle_1']['I'] = controle_i(settings.controle['controle_1']['Ki'], 0.1,
-                                                          settings.controle['controle_1']['I'], erro)
+                                                          settings.controle['controle_1']['I'], erro_tanque)
         settings.tanque['mvtq_2'] = settings.controle['controle_1']['P'] + settings.controle['controle_1']['I']
+
+        if settings.tanque['mvtq_2'] > 30:
+            settings.tanque['mvtq_2'] = 30
+        elif settings.tanque['mvtq_2'] < -30:
+            settings.tanque['mvtq_2'] = -30
+
         return settings.tanque['mvtq_2']
 
     elif settings.controle['controle_1']['tipo'] == 3:
 
         settings.tanque['sptq_2'] = sinal.gerar_sinal(tempo)
-        erro = calc_erro(settings.tanque['sptq_2'], settings.tanque['pvtq_2'])
-        settings.controle['controle_1']['P'] = controle_p(settings.controle['controle_1']['Kp'], erro)
-        settings.controle['controle_1']['D'] = controle_d(settings.controle['controle_1']['Kd'], 0.1, erro,
+        erro_tanque = calc_erro(settings.tanque['sptq_2'], settings.tanque['pvtq_2'])
+        settings.controle['controle_1']['P'] = controle_p(settings.controle['controle_1']['Kp'], erro_tanque)
+        settings.controle['controle_1']['D'] = controle_d(settings.controle['controle_1']['Kd'], 0.1, erro_tanque,
                                                           settings.tanque['erro_passado'])
-        settings.tanque['erro_passado'] = erro
+        settings.tanque['erro_passado'] = erro_tanque
         settings.tanque['mvtq_2'] = settings.controle['controle_1']['P'] + settings.controle['controle_1']['D']
         return settings.tanque['mvtq_2']
 
     elif settings.controle['controle_1']['tipo'] == 4:
 
         settings.tanque['sptq_2'] = sinal.gerar_sinal(tempo)
-        erro = calc_erro(settings.tanque['sptq_2'], settings.tanque['pvtq_2'])
-        settings.controle['controle_1']['P'] = controle_p(settings.controle['controle_1']['Kp'], erro)
+        erro_tanque = calc_erro(settings.tanque['sptq_2'], settings.tanque['pvtq_2'])
+        settings.controle['controle_1']['P'] = controle_p(settings.controle['controle_1']['Kp'], erro_tanque)
         settings.controle['controle_1']['I'] = controle_i(settings.controle['controle_1']['Ki'], 0.1,
-                                                          settings.controle['controle_1']['I'], erro)
-        settings.controle['controle_1']['D'] = controle_d(settings.controle['controle_1']['Kd'], 0.1, erro,
+                                                          settings.controle['controle_1']['I'], erro_tanque)
+        settings.controle['controle_1']['D'] = controle_d(settings.controle['controle_1']['Kd'], 0.1, erro_tanque,
                                                           settings.tanque['erro_passado'])
-        settings.tanque['erro_passado'] = erro
+        settings.tanque['erro_passado'] = erro_tanque
         settings.tanque['mvtq_2'] = settings.controle['controle_1']['P'] +\
                                     settings.controle['controle_1']['I'] + settings.controle['controle_1']['D']
         return settings.tanque['mvtq_2']
@@ -171,13 +176,13 @@ def controlador_externo(tempo):
     elif settings.controle['controle_1']['tipo'] == 5:
 
         settings.tanque['sptq_2'] = sinal.gerar_sinal(tempo)
-        erro = calc_erro(settings.tanque['sptq_2'], settings.tanque['pvtq_2'])
-        settings.controle['controle_1']['P'] = controle_p(settings.controle['controle_1']['Kp'], erro)
+        erro_tanque = calc_erro(settings.tanque['sptq_2'], settings.tanque['pvtq_2'])
+        settings.controle['controle_1']['P'] = controle_p(settings.controle['controle_1']['Kp'], erro_tanque)
         settings.controle['controle_1']['I'] = controle_i(settings.controle['controle_1']['Ki'], 0.1,
-                                                          settings.controle['controle_1']['I'], erro)
-        settings.controle['controle_1']['D'] = controle_d(settings.controle['controle_1']['Kd'], 0.1, erro,
+                                                          settings.controle['controle_1']['I'], erro_tanque)
+        settings.controle['controle_1']['D'] = controle_d(settings.controle['controle_1']['Kd'], 0.1, erro_tanque,
                                                           settings.tanque['erro_passado'])
-        settings.tanque['erro_passado'] = erro
+        settings.tanque['erro_passado'] = erro_tanque
         settings.tanque['mvtq_2'] = settings.controle['controle_1']['P'] +\
                                     settings.controle['controle_1']['I'] - settings.controle['controle_1']['D']
         return settings.tanque['mvtq_2']
@@ -375,4 +380,5 @@ def atuar_pid(tempo):
                 return settings.tanque['mvtq_2']
 
     elif settings.controle['tipo'] == 'cascata':
-        return controlador_interno(controlador_externo(tempo))
+        temp = controlador_externo(tempo)
+        return controlador_interno(temp)
