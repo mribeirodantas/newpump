@@ -18,16 +18,12 @@ def enviar_parametros():
         'ts': settings.tanque['ts'],
         'mp': settings.tanque['mp'],
         'ess': settings.tanque['ess'],
-        'controle_1': {
-            'P': settings.controle['controle_1']['P'],
-            'I': settings.controle['controle_1']['I'],
-            'D': settings.controle['controle_1']['D']
-        },
-        'controle_2': {
-            'P': settings.controle['controle_2']['P'],
-            'I': settings.controle['controle_2']['I'],
-            'D': settings.controle['controle_2']['D']
-        }
+        'P_master': settings.controle['controle_1']['P'],
+        'I_master': settings.controle['controle_1']['I'],
+        'D_master': settings.controle['controle_1']['D'],
+        'P_slave': settings.controle['controle_2']['P'],
+        'I_slave': settings.controle['controle_2']['I'],
+        'D_slave': settings.controle['controle_2']['D']
     }
 
 
