@@ -76,7 +76,8 @@ class Quanser:
         """
         Escreve um valor em Volt no canal da planta
         """
-        string = 'WRITE %d %f\n' % (channel, volt)
+        string = 'WRITE %d %.3f\n' % (channel, volt)
+        print string
         self.__sendData(string)
         string = self.__receiveData()
         if "ACK" in string:
