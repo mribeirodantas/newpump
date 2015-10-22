@@ -31,6 +31,8 @@ def setar_tipo_controle(data):
     try:
         settings.tanque['tempo'] = 0.0
         settings.tanque['flag_ts'] = True
+        settings.tanque['flag_mp'] = True
+        settings.tanque['pv_passado'] = -40
         if data['malha_aberta']:
             settings.controle['malha_aberta'] = True
             if data['tanque'] == 0:

@@ -48,6 +48,7 @@ class MyThread(threading.Thread):
         while not self.kill_received:
             lock.acquire()
             calc_vars_tanque.ts(settings.tanque['tempo'])
+            calc_vars_tanque.mp()
             lock.release()
             sleep(0.1)
 
