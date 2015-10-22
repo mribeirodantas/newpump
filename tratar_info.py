@@ -30,6 +30,7 @@ def enviar_parametros():
 def setar_tipo_controle(data):
     try:
         settings.tanque['tempo'] = 0.0
+        settings.tanque['flag_ts'] = True
         if data['malha_aberta']:
             settings.controle['malha_aberta'] = True
             if data['tanque'] == 0:
@@ -46,7 +47,5 @@ def setar_tipo_controle(data):
             sinal.setar_sinal(data)
             pid.setar_pid(data)
             settings.controle['malha_aberta'] = False
-            print settings.sinal
-            print settings.controle
     except:
         pass

@@ -15,6 +15,7 @@ def init():
         'tp': 0,
         'tr': 0,
         'ts': 0,
+        'flag_ts': True,
         'mp': 0,
         'ess': 0
     }

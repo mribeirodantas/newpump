@@ -9,6 +9,7 @@ from jsonsocket import Server
 import settings
 import tratar_info
 import controlador
+import calc_vars_tanque
 
 lock = threading.Lock()
 
@@ -31,7 +32,7 @@ class MyThread(threading.Thread):
             settings.tanque['pvtq_1'] = conn.readAD(0) * 6.25
             settings.tanque['pvtq_2'] = conn.readAD(1) * 6.25
             lock.release()
-            sleep(0.06)
+            sleep(0.1)
 
     def escrever_tensao(self):
         tensao = 0.00
@@ -46,9 +47,9 @@ class MyThread(threading.Thread):
     def calc_valores(self):
         while not self.kill_received:
             lock.acquire()
-            # print 'Calculando...'
+            calc_vars_tanque.ts(settings.tanque['tempo'])
             lock.release()
-            sleep(1)
+            sleep(0.1)
 
     def conn_supervisorio(self):
         while not self.kill_received:
@@ -95,8 +96,8 @@ if __name__ == '__main__':
     server = Server(host, port)
     threads = []
 
-    conn = driver.Quanser("10.13.99.69", 20081)
-    # conn = driver.Quanser("localhost", 20081)
+    # conn = driver.Quanser("10.13.99.69", 20081)
+    conn = driver.Quanser("localhost", 20081)
     if conn == -1:
         print 'Não foi possível estabelecer uma comunicação.\nRetornou -1'
     else:
