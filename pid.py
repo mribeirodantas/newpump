@@ -318,7 +318,7 @@ def atuar_pid(tempo):
                                             settings.controle['controle_1']['I'] - settings.controle['controle_1']['D']
                 settings.tanque['mvtq_1'] = travas.sequencia_travas(settings.tanque['mvtq_1'])
                 return settings.tanque['mvtq_1']
-        else:
+        elif settings.controle['tanque'] == 1:
             if settings.controle['controle_1']['tipo'] == 1:
 
                 settings.tanque['sptq_2'] = sinal.gerar_sinal(tempo)
@@ -382,5 +382,4 @@ def atuar_pid(tempo):
                 return settings.tanque['mvtq_2']
 
     elif settings.controle['tipo'] == 'cascata':
-        temp = controlador_externo(tempo)
-        return controlador_interno(temp)
+        return controlador_interno(controlador_externo(tempo))

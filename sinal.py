@@ -7,16 +7,6 @@ import math
 def setar_sinal(data):
     if data['sinal']['tipo'] == 'degrau':
 
-        if data['sinal']['amp_max'] == 0:
-            settings.controle['controle_1']['P'] = 0
-            settings.controle['controle_1']['I'] = 0
-            settings.controle['controle_1']['D'] = 0
-            settings.controle['controle_2']['P'] = 0
-            settings.controle['controle_2']['I'] = 0
-            settings.controle['controle_2']['D'] = 0
-            settings.tanque['sptq_1'] = 0
-            settings.tanque['sptq_1'] = 0
-
         settings.sinal['tipo_sinal'] = 0
         settings.sinal['amp_max'] = data['sinal']['amp_max']
         settings.sinal['offset'] = data['sinal']['offset']

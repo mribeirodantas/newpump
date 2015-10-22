@@ -18,7 +18,7 @@ def init():
         'flag_ts': True,
         'mp': 0,
         'flag_mp': True,
-        'pv_passado': -40,
+        'pv_passado': -200.0,
         'ess': 0
     }
 
