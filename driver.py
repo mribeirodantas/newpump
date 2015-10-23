@@ -7,7 +7,7 @@
 #   License: GPLv2
 #
 ##############################################################################
-
+from __future__ import division
 import socket
 
 
@@ -76,8 +76,7 @@ class Quanser:
         """
         Escreve um valor em Volt no canal da planta
         """
-        string = 'WRITE %d %.3f\n' % (channel, volt)
-        print string
+        string = 'WRITE %d %f\n' % (channel, volt)
         self.__sendData(string)
         string = self.__receiveData()
         if "ACK" in string:

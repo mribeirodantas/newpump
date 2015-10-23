@@ -1,10 +1,13 @@
-__author__ = 'pabloholanda'
+from __future__ import division
 import settings
 import sinal
 import travas
 
 def calc_erro(sp, pv):
-    return (sp - pv)
+    try:
+        return (sp - pv)
+    except:
+        return 0
 
 
 def controle_p(Kp, erro):

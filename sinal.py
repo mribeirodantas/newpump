@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-__author__ = 'pabloholanda'
+from __future__ import division
 import settings
 import math
 
