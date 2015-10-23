@@ -134,7 +134,6 @@ def controlador_externo(tempo):
         erro_tanque = calc_erro(settings.tanque['sptq_2'], settings.tanque['pvtq_2'])
         settings.controle['controle_1']['P'] = controle_p(settings.controle['controle_1']['Kp'], erro_tanque)
         settings.tanque['mvtq_2'] = settings.controle['controle_1']['P']
-        settings.tanque['mvtq_2'] = travas.nivel_cascata(settings.tanque['mvtq_2'])
         return settings.tanque['mvtq_2']
 
     elif settings.controle['controle_1']['tipo'] == 2:
@@ -144,9 +143,6 @@ def controlador_externo(tempo):
         settings.controle['controle_1']['I'] = controle_i(settings.controle['controle_1']['Ki'], 0.1,
                                                           settings.controle['controle_1']['I'], erro_tanque)
         settings.tanque['mvtq_2'] = settings.controle['controle_1']['P'] + settings.controle['controle_1']['I']
-
-        settings.tanque['mvtq_2'] = travas.nivel_cascata(settings.tanque['mvtq_2'])
-
         return settings.tanque['mvtq_2']
 
     elif settings.controle['controle_1']['tipo'] == 3:
@@ -158,7 +154,6 @@ def controlador_externo(tempo):
                                                           settings.tanque['erro_passado'])
         settings.tanque['erro_passado'] = erro_tanque
         settings.tanque['mvtq_2'] = settings.controle['controle_1']['P'] + settings.controle['controle_1']['D']
-        settings.tanque['mvtq_2'] = travas.nivel_cascata(settings.tanque['mvtq_2'])
         return settings.tanque['mvtq_2']
 
     elif settings.controle['controle_1']['tipo'] == 4:
@@ -172,8 +167,6 @@ def controlador_externo(tempo):
         settings.tanque['erro_passado'] = erro_tanque
         settings.tanque['mvtq_2'] = settings.controle['controle_1']['P'] +\
                                     settings.controle['controle_1']['I'] + settings.controle['controle_1']['D']
-
-        settings.tanque['mvtq_2'] = travas.nivel_cascata(settings.tanque['mvtq_2'])
         return settings.tanque['mvtq_2']
 
     elif settings.controle['controle_1']['tipo'] == 5:
