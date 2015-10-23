@@ -4,6 +4,7 @@ __author__ = 'pabloholanda'
 def init():
     global tanque, sinal, controle
     tanque = {
+        'tempo': 0.00,
         'pvtq_1': 0.00,
         'pvtq_2': 0.00,
         'mvtq_1': 0.00,
@@ -14,7 +15,10 @@ def init():
         'tp': 0,
         'tr': 0,
         'ts': 0,
+        'flag_ts': True,
         'mp': 0,
+        'flag_mp': True,
+        'pv_passado': -200.0,
         'ess': 0
     }
 

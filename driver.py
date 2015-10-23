@@ -7,7 +7,7 @@
 #   License: GPLv2
 #
 ##############################################################################
-
+from __future__ import division
 import socket
 
 
