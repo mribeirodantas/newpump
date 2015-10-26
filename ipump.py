@@ -30,7 +30,11 @@ class MyThread(threading.Thread):
         while not self.kill_received:
             lock.acquire()
             settings.tanque['pvtq_1'] = conn.readAD(0) * 6.25
+            if settings.tanque['pvtq_1'] < 0:
+                settings.tanque['pvtq_1'] = 0
             settings.tanque['pvtq_2'] = conn.readAD(1) * 6.25
+            if settings.tanque['pvtq_2'] < 0:
+                settings.tanque['pvtq_2'] = 0
             lock.release()
             sleep(0.1)
 
@@ -38,8 +42,8 @@ class MyThread(threading.Thread):
         tensao = 0.00
         while not self.kill_received:
             lock.acquire()
-            tensao = controlador.setar_tensao(settings.tanque['tempo'])
-            conn.writeDA(0, tensao)
+            settings.tanque['tensao'] = controlador.setar_tensao(settings.tanque['tempo'])
+            conn.writeDA(0, settings.tanque['tensao'])
             settings.tanque['tempo'] += 0.1
             lock.release()
             sleep(0.1)

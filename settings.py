@@ -19,7 +19,8 @@ def init():
         'mp': 0,
         'flag_mp': True,
         'pv_passado': -200.0,
-        'ess': 0
+        'ess': 0,
+        'tensao': 0.0
     }
 
     sinal = {

@@ -32,13 +32,15 @@ def setar_tipo_controle(data):
         settings.tanque['tempo'] = 0.0
         settings.tanque['flag_ts'] = True
         settings.tanque['flag_mp'] = True
+        settings.tanque['tensao'] = 0.0
         settings.tanque['pv_passado'] = -200.0
-        settings.controle['controle_1']['P'] = 0
-        settings.controle['controle_1']['I'] = 0
-        settings.controle['controle_1']['D'] = 0
-        settings.controle['controle_2']['P'] = 0
-        settings.controle['controle_2']['I'] = 0
-        settings.controle['controle_2']['D'] = 0
+        settings.controle['controle_1']['P'] = 0.0
+        settings.controle['controle_1']['I'] = 0.0
+        settings.controle['controle_1']['D'] = 0.0
+        settings.controle['controle_2']['P'] = 0.0
+        settings.controle['controle_2']['I'] = 0.0
+        settings.controle['controle_2']['D'] = 0.0
+
 
         if data['malha_aberta']:
             settings.controle['malha_aberta'] = True
@@ -50,7 +52,6 @@ def setar_tipo_controle(data):
                 settings.tanque['mvtq_1'] = 0.00
 
             sinal.setar_sinal(data)
-            print settings.sinal
 
         else:
             sinal.setar_sinal(data)

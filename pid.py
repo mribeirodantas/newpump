@@ -5,21 +5,21 @@ import travas
 
 def calc_erro(sp, pv):
     try:
-        return (sp - pv)
+        return float(sp - pv)
     except:
         return 0
 
 
 def controle_p(Kp, erro):
-    return Kp*erro
+    return float(Kp*erro)
 
 
 def controle_i(Ki, h, i, erro):
-    return i + (Ki * h * erro)
+    return float(i) + (float(Ki) * float(h) * float(erro))
 
 
 def controle_d(Kd, h, erro, erro_passado):
-    return Kd*((erro-erro_passado)/h)
+    return float(Kd)*((float(erro)-float(erro_passado))/float(h))
 
 
 def setar_pid(data):
