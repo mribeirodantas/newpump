@@ -56,3 +56,16 @@ def init():
             'D': 0.000
         }
     }
+
+    observador = {
+        'polos': {
+            'real1': 0,
+            'real2': 0,
+            'img1': 0,
+            'img2': 0
+            },
+        'ganhos': {
+            'ganho1': 0,
+            'ganho2': 0
+        }
+    }

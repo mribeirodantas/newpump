@@ -2,6 +2,7 @@ __author__ = 'pabloholanda'
 import settings
 import sinal
 import pid
+import observadores_de_estado
 
 
 def enviar_parametros():
@@ -57,5 +58,15 @@ def setar_tipo_controle(data):
             sinal.setar_sinal(data)
             pid.setar_pid(data)
             settings.controle['malha_aberta'] = False
+    except:
+        pass
+
+
+def setar_observador_de_estado(data):
+    try:
+        if data['calc_direto']:
+            observadores_de_estado.setar_polos(data)
+        else:
+            observadores_de_estado.setar_ganhos(data)
     except:
         pass

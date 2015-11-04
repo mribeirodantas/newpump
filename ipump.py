@@ -68,6 +68,8 @@ class MyThread(threading.Thread):
                  # Controlar
                  elif data_in['comando'] == 1:
                      tratar_info.setar_tipo_controle(data_in)
+                 elif data_in['comando'] == 3:
+                     tratar_info.setar_observador_de_estado(data_in)
             except:
                 pass
 
