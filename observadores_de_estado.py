@@ -25,3 +25,10 @@ def calc_polinomio_complexo_conjugado():
                             settings.observador['polos']['real1'] - settings.observador['polos']['img1']*j))
 
     return polinomio
+
+
+def calc_polinomio_real():
+    polinomio = numpy.poly((settings.observador['polos']['real1'],
+                            settings.observador['polos']['real2']))
+
+    return polinomio
