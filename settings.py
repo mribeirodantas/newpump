@@ -72,5 +72,6 @@ def init():
         'polinomio': 0,
         'ql': 0,
         'wo': 0,
-        'l': 0
+        'l': 0,
+        'x': 0
     }

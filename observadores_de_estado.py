@@ -74,3 +74,9 @@ def calc_wo():
 
 def calc_l():
     settings.observador['l'] = numpy.dot(calc_ql(), calc_wo())
+
+
+def calc_x():
+    g = numpy.array([[0.999344, 0], [0.000656, 0.999344]])
+    part_1 = numpy.dot(g, settings.observador['x'])
+
