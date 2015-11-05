@@ -67,5 +67,7 @@ def init():
         'ganhos': {
             'ganho1': 0,
             'ganho2': 0
-        }
+        },
+
+        'polinomio': 0
     }
