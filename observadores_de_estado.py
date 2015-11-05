@@ -32,3 +32,18 @@ def calc_polinomio_real():
                             settings.observador['polos']['real2']))
 
     return polinomio
+
+def calc_polinomio_real_complexo():
+    j = cmath.sqrt(-1)
+    polinomio = numpy.poly((settings.observador['polos']['real1'] + settings.observador['polos']['img_1']*j,
+                            settings.observador['polos']['real2']))
+
+    return polinomio
+
+
+def calc_polinomio_complexos():
+    j = cmath.sqrt(-1)
+    polinomio = numpy.poly((settings.observador['polos']['real1'] + settings.observador['polos']['img_1']*j,
+                            settings.observador['polos']['real2'] + settings.observador['polos']['img_2']*j))
+
+    return polinomio
