@@ -24,7 +24,7 @@ def calc_polinomio_complexo_conjugado():
     polinomio = numpy.poly((settings.observador['polos']['real1'] + settings.observador['polos']['img1']*j,
                             settings.observador['polos']['real1'] - settings.observador['polos']['img1']*j))
 
-    
+
     settings.observador['polinomio'] = polinomio
 
 
