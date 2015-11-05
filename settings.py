@@ -69,5 +69,8 @@ def init():
             'ganho2': 0
         },
 
-        'polinomio': 0
+        'polinomio': 0,
+        'ql': 0,
+        'wo': 0,
+        'l': 0
     }
