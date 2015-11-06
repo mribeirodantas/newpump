@@ -67,8 +67,10 @@ class MyThread(threading.Thread):
                      server.send(tratar_info.enviar_parametros())
                  # Controlar
                  elif data_in['comando'] == 1:
+                     settings.tanque['controle'] = 0
                      tratar_info.setar_tipo_controle(data_in)
                  elif data_in['comando'] == 3:
+                     settings.tanque['controle'] = 1
                      tratar_info.setar_observador_de_estado(data_in)
             except:
                 pass

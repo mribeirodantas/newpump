@@ -51,6 +51,17 @@ def calc_polinomio_complexos():
     settings.observador['polinomio'] = polinomio
 
 
+def tipo_polinomio():
+    if settings.observador['polos']['tipo'] == 1:
+        calc_polinomio_complexo_conjugado()
+    elif settings.observador['polos']['tipo'] == 2:
+        calc_polinomio_complexos()
+    elif settings.observador['polos']['tipo'] == 3:
+        calc_polinomio_real_complexo()
+    elif settings.observador['polos']['tipo'] == 4:
+        calc_polinomio_real()
+
+
 def calc_ql():
     ql = 0
     g = numpy.array([[0.999344, 0], [0.000656, 0.999344]])
@@ -63,14 +74,10 @@ def calc_ql():
 
     settings.observador['ql'] = ql
 
-    return ql
-
 
 def calc_wo():
     wo_inv = numpy.array([-1523.39, 1524.39], [1524.39, -1524.39])
     settings.observador['wo'] = numpy.dot(wo_inv, numpy.array([[0], [1]]))
-
-    return wo_inv
 
 
 def calc_l():

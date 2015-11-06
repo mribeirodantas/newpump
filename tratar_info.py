@@ -66,6 +66,10 @@ def setar_observador_de_estado(data):
     try:
         if data['calc_direto']:
             observadores_de_estado.setar_polos(data)
+            observadores_de_estado.tipo_polinomio()
+            observadores_de_estado.calc_wo()
+            observadores_de_estado.calc_ql()
+            observadores_de_estado.calc_l()
         else:
             observadores_de_estado.setar_ganhos(data)
     except:
