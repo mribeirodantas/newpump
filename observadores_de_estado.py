@@ -4,6 +4,7 @@ import cmath
 
 
 def setar_polos(data):
+    settings.observador['polos']['tipo'] = data['polos']['tipo']
     settings.observador['polos']['real1'] = data['polos']['real_1']
     settings.observador['polos']['real2'] = data['polos']['real_2']
     settings.observador['polos']['img1'] = data['polos']['img_1']

@@ -59,6 +59,7 @@ def init():
 
     observador = {
         'polos': {
+            'tipo': 0,
             'real1': 0,
             'real2': 0,
             'img1': 0,
